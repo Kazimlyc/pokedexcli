@@ -49,6 +49,11 @@ func commandHelp() error {
 	return nil
 }
 
+func commandMap() error {
+
+	return nil
+}
+
 func getCommands() map[string]cliCommand {
 	return map[string]cliCommand{
 		"exit": {
@@ -60,6 +65,11 @@ func getCommands() map[string]cliCommand {
 			name:        "help",
 			description: "Displays a help message",
 			callback:    commandHelp,
+		},
+		"map": {
+			name:        "map",
+			description: "Displays the names of 30 locastion areas in the Pokemon world",
+			callback:    commandMap,
 		},
 	}
 }
