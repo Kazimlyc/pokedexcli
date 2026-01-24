@@ -2,6 +2,7 @@ package main
 
 import (
 	"bufio"
+	"encoding/json"
 	"fmt"
 	"os"
 	"strings"
@@ -55,8 +56,28 @@ func commandHelp(cfg *config) error {
 }
 
 func commandMap(cfg *config) error {
+	type LocationAreasResp struct {
+		Count    int
+		Next     *string
+		Previous *string
+		Results  []struct {
+			Name fmt.Stringer
+			URL  string
+		}
+	}
 	// Todo you need data value and error checking then unmarshal the json lastly loop the location name
-	FetchLocations("https://pokeapi.co/api/v2/location-area/")
+	data, err := FetchLocations("https://pokeapi.co/api/v2/location-area/")
+	if err != nil {
+		return err
+	}
+	var dat map[string]interface{}
+	if err := json.Unmarshal(data, &dat); err != nil {
+		return err
+	}
+	for i := 0; i < 20; i++ {
+
+	}
+
 	return nil
 }
 
