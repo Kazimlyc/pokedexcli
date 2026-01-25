@@ -61,21 +61,21 @@ func commandMap(cfg *config) error {
 		Next     *string
 		Previous *string
 		Results  []struct {
-			Name fmt.Stringer
+			Name string
 			URL  string
 		}
 	}
-	// Todo you need data value and error checking then unmarshal the json lastly loop the location name
+	// Todo access just name field and set cfg.next and previous
 	data, err := FetchLocations("https://pokeapi.co/api/v2/location-area/")
 	if err != nil {
 		return err
 	}
-	var dat map[string]interface{}
-	if err := json.Unmarshal(data, &dat); err != nil {
+	var locationData LocationAreasResp
+	if err := json.Unmarshal(data, &locationData); err != nil {
 		return err
 	}
 	for i := 0; i < 20; i++ {
-
+		fmt.Println(locationData.Results[i])
 	}
 
 	return nil
