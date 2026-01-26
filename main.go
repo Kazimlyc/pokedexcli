@@ -65,8 +65,13 @@ func commandMap(cfg *config) error {
 			URL  string
 		}
 	}
-	// Todo access just name field and set cfg.next and previous
-	data, err := FetchLocations("https://pokeapi.co/api/v2/location-area/")
+	url := "https://pokeapi.co/api/v2/location-area/"
+
+	if cfg.Next != nil {
+		url = *cfg.Next
+	}
+
+	data, err := FetchLocations(url)
 	if err != nil {
 		return err
 	}
@@ -74,14 +79,46 @@ func commandMap(cfg *config) error {
 	if err := json.Unmarshal(data, &locationData); err != nil {
 		return err
 	}
-	for i := 0; i < 20; i++ {
-		fmt.Println(locationData.Results[i])
+	for i := 0; i < len(locationData.Results); i++ {
+		fmt.Println(locationData.Results[i].Name)
 	}
+	cfg.Next = locationData.Next
+	cfg.Previous = locationData.Previous
 
 	return nil
 }
 
 func commandMapb(cfg *config) error {
+	type LocationAreasResp struct {
+		Count    int
+		Next     *string
+		Previous *string
+		Results  []struct {
+			Name string
+			URL  string
+		}
+	}
+
+	url := *cfg.Previous
+
+	if cfg.Previous == nil {
+		return fmt.Errorf("you're on the first page")
+	}
+
+	data, err := FetchLocations(url)
+	if err != nil {
+		return err
+	}
+
+	var locationData LocationAreasResp
+	if err := json.Unmarshal(data, &locationData); err != nil {
+		return err
+	}
+	for i := 0; i < 20; i++ {
+		fmt.Println(locationData.Results[i].Name)
+	}
+	cfg.Next = locationData.Next
+	cfg.Previous = locationData.Previous
 
 	return nil
 }
