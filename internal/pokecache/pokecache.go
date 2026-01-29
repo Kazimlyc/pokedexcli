@@ -20,9 +20,16 @@ func NewCache(interval time.Duration) Cache {
 }
 
 func (c *Cache) Add(key string, val []byte) {
-
+	c.mu.Lock()
+	defer c.mu.Lock()
 }
 
 func (c *Cache) Get(key string, val []byte) {
+	c.mu.Lock()
+	defer c.mu.Lock()
+}
+
+// TODO
+func (c *Cache) reapLoop(interval time.Duration) {
 
 }
