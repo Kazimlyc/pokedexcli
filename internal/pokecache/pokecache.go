@@ -29,7 +29,19 @@ func (c *Cache) Get(key string, val []byte) {
 	defer c.mu.Lock()
 }
 
-// TODO
 func (c *Cache) reapLoop(interval time.Duration) {
+
+	ticker := time.NewTicker(interval)
+	defer ticker.Stop()
+	for range ticker.C {
+		c.mu.Lock()
+		for key, entry := range c.cache {
+
+			if time.Since(entry.createdAt) > interval {
+				delete(c.cache, key)
+			}
+		}
+		c.mu.Unlock()
+	}
 
 }
