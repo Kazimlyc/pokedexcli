@@ -123,6 +123,11 @@ func commandMapb(cfg *config) error {
 	return nil
 }
 
+// todo
+func commandExplore(cfg *config) error {
+	return nil
+}
+
 func getCommands() map[string]cliCommand {
 	return map[string]cliCommand{
 		"exit": {
@@ -144,6 +149,12 @@ func getCommands() map[string]cliCommand {
 			name:        "mapb",
 			description: "Displays the names of 20 location areas in the Pokemon world",
 			callback:    commandMapb,
+		},
+		"explore": {
+			name: "explore",
+			// Todo
+			description: "",
+			callback:    commandExplore,
 		},
 	}
 }
