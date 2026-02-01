@@ -29,13 +29,19 @@ func startRepl(cfg *config) {
 
 		input := scanner.Text()
 
-		input = strings.Fields(input)[0]
+		fields := strings.Fields(input)
+		if len(fields) == 0 {
+			continue
+		}
+
+		cmdName := strings.ToLower(fields[0])
 
 		args := []string{}
+		if len(fields) > 1 {
+			args = fields[1:]
+		}
 
-		input = strings.ToLower(input)
-
-		command, exists := getCommands()[input]
+		command, exists := getCommands()[cmdName]
 		if !exists {
 			fmt.Println("Unknown command")
 			continue
