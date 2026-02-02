@@ -23,7 +23,7 @@ func commandMap(cfg *config, args ...string) error {
 		url = *cfg.Next
 	}
 
-	data, err := FetchLocations(url)
+	data, err := cfg.pokeapiClient.FetchLocations(url)
 	if err != nil {
 		return err
 	}
@@ -48,7 +48,7 @@ func commandMapb(cfg *config, args ...string) error {
 		return fmt.Errorf("you're on the first page")
 	}
 
-	data, err := FetchLocations(url)
+	data, err := cfg.pokeapiClient.FetchLocations(url)
 	if err != nil {
 		return err
 	}

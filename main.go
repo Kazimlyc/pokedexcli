@@ -1,5 +1,11 @@
 package main
 
+import (
+	"time"
+
+	"github.com/Kazimlyc/pokedexcli/internal/pokeapi"
+)
+
 type cliCommand struct {
 	name        string
 	description string
@@ -7,12 +13,18 @@ type cliCommand struct {
 }
 
 type config struct {
-	Next     *string
-	Previous *string
+	pokeapiClient pokeapi.Client
+	Next          *string
+	Previous      *string
 }
 
 func main() {
-	cfg := &config{}
+	cfg := &config{
+		pokeapiClient: pokeapi.NewClient(
+			5*time.Second,
+			5*time.Minute,
+		),
+	}
 	startRepl(cfg)
 
 }
