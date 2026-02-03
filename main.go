@@ -54,27 +54,23 @@ func getCommands() map[string]cliCommand {
 			callback:    commandMapb,
 		},
 		"explore": {
-			name: "explore",
-			// Todo
-			description: "",
+			name:        "explore",
+			description: "Explores a specific location to see which Pokemon live there",
 			callback:    commandExplore,
 		},
 		"catch": {
-			name: "catch",
-			//todo
-			description: "",
+			name:        "catch",
+			description: "Attempts to catch a Pokemon and add it to your Pokedex",
 			callback:    commandCatch,
 		},
 		"inspect": {
-			name: "inspect",
-			//todo
-			description: "",
+			name:        "inspect",
+			description: "Displays detailed stats and information about a caught Pokemon",
 			callback:    commandInspect,
 		},
 		"pokedex": {
-			name: "pokedex",
-			//todo
-			description: "",
+			name:        "pokedex",
+			description: "Lists all the Pokemon you have successfully caught so far",
 			callback:    commandPokedex,
 		},
 	}
