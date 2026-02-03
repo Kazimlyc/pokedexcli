@@ -2,7 +2,6 @@ package main
 
 import "fmt"
 
-// todo
 func commandExplore(cfg *config, args ...string) error {
 	if len(args) != 1 {
 		return fmt.Errorf("you must provide a location name")
