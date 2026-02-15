@@ -6,15 +6,6 @@ A high-performance, command-line interactive Pokemon encyclopedia built with Go.
 - **Catch & Inspect:** Catch Pokemon and view their stats.
 - **In-Memory Cache:** Fast responses with a custom cache system.
 
-
-## Installation & Usage
-
-```bash
-git clone github.com/Kazimlyc/pokedexcli
-cd pokedexcli
-go run .
-```
-
 ## Commands
 
 | Command | Description |
